@@ -4,27 +4,30 @@ board = [[0,0,0],[0,0,0],[0,0,0]]
 
 def printLine(input):
 	i = 0
-	# print(" ")
+	"|   |   |   |"
 	while i < 3:
 		if input[i] == 1:
 			# print("X", end='')
-			print("1", end='')
+			print("| X ", end='')
 		elif input[i] == 2:
 			# print("O, end='')
-			print("2", end='')
+			print("| O ", end='')
 		else:
-			print(" ", end='')
-		if i != 2:
-			print(" | ", end="")
+			print("|   ", end='')
 		i = i + 1
-	print(" ")
-	print("----------")
+	print("|")
+
+def printSeperator():
+	print("• - • - • - •")
 
 def printBoard():
-	print("----------")
+	printSeperator()
 	printLine(board[0])
+	printSeperator()
 	printLine(board[1])
+	printSeperator()
 	printLine(board[2])
+	printSeperator()
 
 def check_user_input_row(input):
 	try:
