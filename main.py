@@ -2,15 +2,16 @@
 # board = line * 3
 board = [[0,0,0],[0,0,0],[0,0,0]]
 
-
 def printLine(input):
 	i = 0
 	# print(" ")
 	while i < 3:
 		if input[i] == 1:
-			print("X", end='')
+			# print("X", end='')
+			print("1", end='')
 		elif input[i] == 2:
-			print("O", end='')
+			# print("O, end='')
+			print("2", end='')
 		else:
 			print(" ", end='')
 		if i != 2:
@@ -24,13 +25,6 @@ def printBoard():
 	printLine(board[0])
 	printLine(board[1])
 	printLine(board[2])
-	# print(board[0])
-	# print(board[1])
-	# print(board[2])
-	
-
-
-
 
 def check_user_input_row(input):
 	try:
@@ -54,31 +48,18 @@ def check_user_input_col(input):
 		print("Input col is not integer")
 		return -1
 
-def check_line_win(line):
-	if line[0] == 1 and line [1] == 1 and line[2] == 1:
-		return 1
-	elif line[0] == 2 and line [1] == 2 and line[2] == 2:
-		return 2
+def check_line_win(x):
+	if board[x][0] == board[x][1] == 1 and board[x][0] == board[x][2]:
+		return board[x][0]
+	if board[0][x] == board[1][x] == 1 and board[0][x] == board[2][x]:
+		return board[0][x]
 	return 0
-def check_row_win(row):
-	if board[0][row] == 1 and board[1][row] == 1 and board[2][row] == 1:
-		return 1
-	elif board[0][row] == 2 and board[1][row] == 2 and board[2][row] == 2:
-		return 2
-	return 0
-def check_diagonal_win(case):
-	if case == 0:
-		if board[0][0] == 1 and board[1][1] == 1 and board[2][2] == 1:
-			return 1
-		elif board[0][0] == 2 and board[1][1] == 2 and board[2][2] == 2:
-			return 2
-		return 0
-	else:
-		if board[0][2] == 1 and board[1][1] == 1 and board[2][0] == 1:
-			return 1
-		elif board[0][2] == 2 and board[1][1] == 2 and board[2][0] == 2:
-			return 2
-		return 0
+
+def check_diagonal_win():
+	if board[0][0] == board[1][1] and board[0][0] == board[2][2]:
+		return board[0][0]
+	if board[0][2] == board[1][1] and board[0][2] == board[2][0]:
+		return board[0][2]
 	return 0
 
 def check_line_full(row):
@@ -91,38 +72,16 @@ def check_draw():
 		return 1
 	return 0
 
-
 def check_if_end():
-	res = check_line_win(board[0])
-	if res == 1 or res == 2:
-		print("Player Nr. ", res, " won!")
-		return res
-	res = check_line_win(board[1])
-	if res == 1 or res == 2:
-		print("Player Nr. ", res, " won!")
-		return res
-	res = check_line_win(board[2])
-	if res == 1 or res == 2:
-		print("Player Nr. ", res, " won!")
-		return res
-	res = check_row_win(0)
-	if res == 1 or res == 2:
-		print("Player Nr. ", res, " won!")
-		return res
-	res = check_row_win(1)
-	if res == 1 or res == 2:
-		print("Player Nr. ", res, " won!")
-		return res
-	res = check_row_win(2)
-	if res == 1 or res == 2:
-		print("Player Nr. ", res, " won!")
-		return res
-	res = check_diagonal_win(0)
-	if res == 1 or res == 2:
-		print("Player Nr. ", res, " won!")
-		return res
-	res = check_diagonal_win(1)
-	if res == 1 or res == 2:
+	i = 0
+	while i < 3:
+		res = check_line_win(i)
+		if res != 0:
+			print("Player Nr. ", res, " won!")
+			return res
+		i = i + 1
+	res = check_diagonal_win()
+	if res != 0:
 		print("Player Nr. ", res, " won!")
 		return res
 	res = check_draw()
