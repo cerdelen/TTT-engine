@@ -1,5 +1,3 @@
-# line = [0] * 3
-# board = line * 3
 board = [[0,0,0],[0,0,0],[0,0,0]]
 
 def printLine(input):
